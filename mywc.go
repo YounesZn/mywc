@@ -45,7 +45,7 @@ func wc_w(filePath string) int64 {
 	return int64(cmp)
 }
 func main() {
-	if len(os.Args) > 2 {
+	if len(os.Args) == 3 {
 		filePath := os.Args[2]
 		fileParts := strings.Split(filePath, "/")
 		fileName := fileParts[len(fileParts)-1]
@@ -63,19 +63,19 @@ func main() {
 		case "-w":
 			{
 				fmt.Printf("%d %s", wc_w(filePath), fileName)
-
 				break
 			}
 
 		}
 
-	} else {
+	} else if len(os.Args) == 2 {
 		filePath := os.Args[1]
 		fileParts := strings.Split(filePath, "/")
 		fileName := fileParts[len(fileParts)-1]
 		fmt.Printf("%d %d %d %s \n", wc_l(filePath), wc_w(filePath), wc_c(filePath), fileName)
 
 		return
+	} else {
+		log.Fatal("no file path is provided")
 	}
-
 }
